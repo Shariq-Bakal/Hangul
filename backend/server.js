@@ -1,9 +1,15 @@
 const express = require("express")
+require("dotenv").config()
 
 
 const app = express();
 
+app.get("/" , (req,res) => {
+    res.status(200).send("success")
+})
 
-app.listen(5051, () => {
-    console.log(`App listened to ${5051}`)
+const PORT = process.env.PORT
+
+app.listen(PORT, () => {
+    console.log(`App listened to ${PORT}`)
 })
