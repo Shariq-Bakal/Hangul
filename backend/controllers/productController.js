@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const Product = require("../models/productModel");
 //Get all products
 const getAllProducts = async(req, res) => {
@@ -22,9 +24,14 @@ const getSingleProduct = async(req, res) => {
 //Post product
 
 const postProduct = async(req, res) => {
-    const { productName, productPrice, productDescription, productDiscountPrice, Cod, productImg, productsCategory } = req.body;
+    const { productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory } = req.body;
+    const {originalname,path} = req.file
+    const imageParts = originalname.split(".") 
+    const extension = imageParts[imageParts.length-1]
+    const newPath  = path + "." + extension
+    fs.renameSync(path,newPath)
     try {
-        const newProduct = await Product.create({ productName, productPrice, productDescription, productDiscountPrice, Cod, productImg, productsCategory });
+        const newProduct = await Product.create({ productName, productPrice, productDescription, productDiscountPrice, Cod, productImg : newPath, productsCategory });
         res.status(201).json(newProduct)
 
 
