@@ -1,0 +1,24 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar{
+  box-shadow: 0 6px 10px -6px grey;
+}
+
+.app{
+  min-height: 80vh;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  color: black; 
+  text-decoration: none;
+  background-color: none;
+}
+
+
+.active{
+  border-bottom: 2px solid black;
+}
