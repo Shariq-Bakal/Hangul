@@ -20,7 +20,6 @@ app.listen(PORT, () => {
     })
 })
 
-  
 const upload = multer({ dest : "uploads/"})
 
 
