@@ -22,3 +22,30 @@
 .active {
     border-bottom: 2px solid black;
 }
+
+.product-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.product-container div { 
+    /* max-width: 50vw; */
+    box-shadow: 0 6px 10px -7px grey;
+}
+
+.product-container p { 
+    font-weight: 550;
+    font-size: 1.2rem;
+}
+
+.img-fluid{
+    aspect-ratio: 3/3;
+    height: 25rem;
+    mix-blend-mode: initial;
+    border-radius: 5px;
+}
+
+.product-container h4 { 
+    max-width: 30ch
+}

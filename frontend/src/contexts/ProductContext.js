@@ -12,8 +12,8 @@ const productReducer = (state,action)=>{
     switch(action.type){
         case "GET_PRODUCTS":
             return {...state,products:(state.products,action.payload)}
-        
-
+        default :
+            return {...state}
     }
 
 }
@@ -30,6 +30,6 @@ export const ProductProvider = ({children})=>{
 
 //creating custom hook
 
-export const useProducts = ()=>useContext(ProductContext);
+export const useProducts = () => useContext(ProductContext);
 
 
