@@ -16,7 +16,6 @@ const HomePage = () => {
     } catch(error) {
       console.log(error)
     }
-
   }
   useEffect(()=>{
     fetchProducts();
@@ -31,9 +30,6 @@ const HomePage = () => {
           <p className='p-2'>Price : {productPrice}</p>
         </div>)}
       </div>
-    </Layout>
-  
-  )
-}
+</Layout> )
 
 export default HomePage
