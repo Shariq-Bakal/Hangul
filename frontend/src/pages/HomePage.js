@@ -4,44 +4,32 @@ import { useEffect } from 'react'
 import { useProducts } from '../contexts/ProductContext'
 
 const HomePage = () => {
-  const {productState,dispatchProduct} = useProducts();
- 
-  useEffect(()=>{
-    const fetchProducts = async ()=>{
-      const response = await fetch("/api/products");
-      const data = await response.json() 
-      dispatchProduct({type:"GET_PRODUCTS",payload:data})
-      console.log(data)
-      
-    
-    }
-    
-    fetchProducts()
-  },[dispatchProduct])
-  
 
- 
+  const {dispatchProduct , productState} = useProducts();
+  const {products} = productState;
+
+  const fetchProducts = async () => {
+    try{
+      const response = await fetch("/api/products");
+      const data = await response.json()
+      dispatchProduct({type: "GET_PRODUCTS" , payload  : data?.products})
+    } catch(error) {
+      console.log(error)
+    }
+  }
+  useEffect(()=>{
+    fetchProducts();
+  },[])
 
   return (
     <Layout>
-      <h1>Products</h1> <br/>
-      {
-        productState.products.map(product=>{
-          return <div className='product-container'>
-            <img src={product.productImg} height="300" width="300"/> <br/>
-            <span>{product.productName}</span>
-
-            <span>{product.productDescription}</span> <br/>
-            
-            </div>
-        })
-      }
-        
-        
-
-    </Layout>
-  
-  )
-}
+      <div className='product-container'>
+      {products?.map(({productName , _id , productPrice , productImg }) => <div key={_id} className='m-2'>
+        <img src= {productImg} className="img-fluid" alt= {productName} />
+          <h4 className='p-2'>{productName}</h4>
+          <p className='p-2'>Price : {productPrice}</p>
+        </div>)}
+      </div>
+</Layout> )
 
 export default HomePage

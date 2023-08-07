@@ -11,11 +11,8 @@ root.render(
     <Router>
       <ProductProvider>
       <App/>
-
       </ProductProvider>
-   
     </Router>
-   
   </React.StrictMode>
 );
 

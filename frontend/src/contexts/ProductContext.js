@@ -14,8 +14,6 @@ const productReducer = (state,action)=>{
             return {...state,products:action.payload};
         default:
           return  state
-        
-
     }
 
 }
@@ -32,6 +30,6 @@ export const ProductProvider = ({children})=>{
 
 //creating custom hook
 
-export const useProducts = ()=>useContext(ProductContext);
+export const useProducts = () => useContext(ProductContext);
 
 
