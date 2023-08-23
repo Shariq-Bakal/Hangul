@@ -1,15 +1,14 @@
 const express = require("express")
 const multer = require("multer")
-
 const mongoose = require("mongoose")
 const productRouter = require("./routes/productRoutes")
 require("dotenv").config()
 
+const cartRouter = require("./routes/cartRoutes")
+const wishlistRouter = require("./routes/wishlistRoutes")
 
 const app = express();
 const { PORT, MONGODB_URL } = process.env;
-
-
 
 //connecting to mongo db
 app.listen(PORT, () => {
@@ -32,6 +31,11 @@ app.use(express.urlencoded({ extended: false }))
 app.use("/uploads", express.static(__dirname + "/uploads"))
 
 app.use("/api/products", upload.single("productImg"), productRouter)
+
+app.use("/api/cart" , cartRouter)
+
+app.use("/api/wishlist" , wishlistRouter)
+
 
 
 app.get("/", (req, res) => {

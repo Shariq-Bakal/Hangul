@@ -21,15 +21,29 @@ const HomePage = () => {
     fetchProducts();
   },[])
 
+  const addToCart = async (product) => {
+    console.log(product)
+    try {
+      const res = await fetch(`/api/cart/${product._id}` , {method : "POST", headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({product})});
+      const data = await res.json();
+      console.log(data)
+    } catch(error){
+      console.log(error)
+    }
+  }
+
   return (
     <Layout>
       <div className='product-container'>
-      {products?.map(({productName , _id , productPrice , productImg }) => <div key={_id} className='m-2'>
-        <img src= {productImg} className="img-fluid" alt= {productName} />
-          <h4 className='p-2'>{productName}</h4>
-          <p className='p-2'>Price : {productPrice}</p>
+      {products?.map((product) => <div key={product?._id} className='m-2'>
+        <img src= {product?.productImg} className="img-fluid" alt= {product?.productName} />
+          <h4 className='p-2'>{product?.productName}</h4>
+          <p className='p-2'>Price : {product?.productPrice}</p>
+          <button onClick={ () => addToCart(product)}>Add to cart</button>
         </div>)}
       </div>
 </Layout> )
+}
 
 export default HomePage

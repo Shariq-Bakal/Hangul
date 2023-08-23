@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema
 
-const productSchema = new Schema({
+const wishlistSchema = new Schema({
     productName: {
         required: true,
         type: String
@@ -34,4 +34,4 @@ const productSchema = new Schema({
 
 }, { timestamps: true })
 
-module.exports = mongoose.model("Model", productSchema);
+module.exports = mongoose.model("Wishlist", wishlistSchema);
