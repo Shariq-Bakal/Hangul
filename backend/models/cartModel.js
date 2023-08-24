@@ -8,23 +8,23 @@ const cartSchema = new Schema({
         type: String
     },
     productPrice: {
-        // required: true,
+        required: true,
         type: Number
     },
     productDescription: {
-        // required: true,
+        required: true,
         type: String
     },
     productDiscountPrice: {
-        // required: true,
+        required: true,
         type: String
     },
     productsCategory: {
-        // required: true,
+        required: true,
         type: String
     },
     Cod: {
-        // required: true,
+        required: true,
         type: Boolean
     },
     productImg: {
