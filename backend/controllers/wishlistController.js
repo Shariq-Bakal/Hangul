@@ -21,7 +21,7 @@ const getWishlistProducts = async(req, res) => {
 }
 
 const addProductToWishlist = async(req, res) => {
-    const { productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg } = req.body.product;
+    const { productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg } = req.body.singleProduct;
 
     try {
         const wishlistProduct = await Wishlist.create({ productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg });
