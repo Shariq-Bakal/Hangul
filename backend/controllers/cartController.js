@@ -9,7 +9,6 @@ const getCartProducts = async(req, res) => {
             totalCount: cartProducts.length,
             cartProducts
         });
-
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -24,7 +23,7 @@ const addProductToCart = async(req, res) => {
 
     //Destructuring property names from product object which is inside body itself
 
-    const { productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg } = req.body.product;
+    const { productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg } = req.body.singleProduct;
     try {
         const cartProduct = await Cart.create({ productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg });
 
@@ -33,7 +32,6 @@ const addProductToCart = async(req, res) => {
             success: true,
             cartProduct
         })
-
     } catch (error) {
         console.log(error)
         res.status(500).json({

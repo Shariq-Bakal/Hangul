@@ -2,6 +2,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: sans-serif;
 }
 
 .navbar {
@@ -39,6 +40,23 @@
     font-size: 1.2rem;
 }
 
+.actual-price{
+    text-decoration: line-through;
+}
+
+.single-product{
+    display: flex;
+}
+
+.product-img{
+    max-width: 50vw;
+    max-height: 75vh;
+}
+
+.single-product p.price {
+    font-weight: bold;
+}
+
 .img-fluid{
     aspect-ratio: 3/3;
     height: 25rem;
@@ -47,5 +65,9 @@
 }
 
 .product-container h4 { 
-    max-width: 30ch
+    max-width: 30ch;
+}
+
+.description{
+    font-weight: bold;
 }

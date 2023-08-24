@@ -2,11 +2,13 @@ import React from 'react'
 import Layout from '../components/Layout'
 import { useEffect } from 'react'
 import { useProducts } from '../contexts/ProductContext'
+import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
 
   const {dispatchProduct , productState} = useProducts();
   const {products} = productState;
+  const navigate = useNavigate();
 
   const fetchProducts = async () => {
     try{
@@ -21,32 +23,13 @@ const HomePage = () => {
     fetchProducts();
   },[])
 
-  const addToCart = async (product) => {
-    console.log(product)
-    try {
-      const res = await fetch(`/api/cart/${product._id}` , {method : "POST", headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({product})});
-      const data = await res.json();
-      console.log(data)
-    } catch(error){
-      console.log(error)
-    }
-  }
-  //adding to wishlist
-
-  const addToWishlist= async(product)=>{
+  const getSingleProduct = async (product) => {
     try{
-      const res = await fetch(`/api/wishlist/${product._id}`,{
-        method:"POST",
-        headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({product})
-      })
-      const data = await res.json()
-      console.log(data)
-      
-
-    }
-    catch(error){
+      navigate(`/products/${product._id}`)
+      const res = await fetch(`/api/products/${product._id}`);
+      const singleProduct = await res.json();
+      console.log(singleProduct)
+    } catch(error) {
       console.log(error)
     }
   }
@@ -54,12 +37,10 @@ const HomePage = () => {
   return (
     <Layout>
       <div className='product-container'>
-      {products?.map((product) => <div key={product?._id} className='m-2'>
+      {products?.map((product) => <div key={product?._id} className='m-2' onClick={() => getSingleProduct(product)}>
         <img src= {product?.productImg} className="img-fluid" alt= {product?.productName} />
           <h4 className='p-2'>{product?.productName}</h4>
-          <p className='p-2'>Price : {product?.productPrice}</p>
-          <button onClick={ () => addToCart(product)}>Add to cart</button> <br/>
-          <button onClick={()=>addToWishlist(product)}>Add to wishlist</button>
+          <p className='p-2'>Price : <span className='actual-price'>{product?.productPrice}</span><span className='p-2'>{product?.productDiscountPrice}</span></p>
         </div>)}
       </div>
 </Layout> )
