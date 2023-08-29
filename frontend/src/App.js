@@ -3,6 +3,8 @@ import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import Productpage from "./pages/Productpage";
 import SingleProductPage from "./pages/SingleProductPage";
+import CartPage from "./pages/CartPage";
+import WishlistPage from "./pages/WishlistPage";
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <Route path="/about" element={<About/>} />
       <Route path="/products" element={<Productpage/>} />
       <Route path={`products/:id`} element={<SingleProductPage/>} />  
+      <Route path="/cart" element={<CartPage/>} />
+      <Route path="/wishlist" element={<WishlistPage/>}/>
     </Routes>
   </>
   );

@@ -37,10 +37,10 @@ const Header = () => {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <NavLink className="nav-link active" aria-current="page" href="#">Cart</NavLink>
+          <NavLink to="/cart" className="nav-link active" aria-current="page">Cart</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link" href="#">Wishlist</NavLink>
+          <NavLink to="/wishlist"className="nav-link">Wishlist</NavLink>
         </li>
         <li className="nav-item">
           <NavLink className="nav-link">Account</NavLink>

@@ -24,6 +24,7 @@ const SingleProductPage = () => {
           body: JSON.stringify({singleProduct})});
           const data = await res.json();
           console.log(data)
+          dispatchProduct({type:"SET_CART_PRODUCTS",payload:data})
         } catch(error){
           console.log(error)
         }
@@ -38,7 +39,7 @@ const SingleProductPage = () => {
           body: JSON.stringify({singleProduct})
           })
           const data = await res.json()
-          console.log(data)
+          dispatchProduct({type:"SET_WISHLIST_PRODUCTS",payload:data})
           
     
         }
