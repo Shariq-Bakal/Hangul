@@ -21,10 +21,10 @@ const getWishlistProducts = async(req, res) => {
 }
 
 const addProductToWishlist = async(req, res) => {
-    const { productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg } = req.body.singleProduct;
+    const { _id , productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg } = req.body.singleProduct;
 
     try {
-        const wishlistProduct = await Wishlist.create({ productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg });
+        const wishlistProduct = await Wishlist.create({ _id , productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg });
         res.status(201).json({
             message: "Product added to wishlist successfully",
             success: true,

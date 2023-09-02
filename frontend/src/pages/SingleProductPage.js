@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
 import Layout from '../components/Layout';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useProducts } from '../contexts/ProductContext';
 
 const SingleProductPage = () => {
     const {id} = useParams();
-    const {dispatchProduct , productState : {singleProduct} } = useProducts();
+    const {dispatchProduct , productState : {singleProduct , cart , wishlist} } = useProducts();
+    const navigate = useNavigate();
 
     const getSingleProduct = async () => {
         const res = await fetch(`/api/products/${id}`)
         const singleProd = await res.json()
-        dispatchProduct({type: "GET_SINGLE_PRODUCT", payload : singleProd })
+        console.log(singleProd)
+        dispatchProduct({type: "GET_SINGLE_PRODUCT", payload : singleProd?.product})
     }
 
     useEffect(() => {
@@ -18,13 +20,11 @@ const SingleProductPage = () => {
     },[])
 
     const addToCart = async () => {
-        console.log(singleProduct)
         try {
           const res = await fetch(`/api/cart/${singleProduct._id}` , {method : "POST", headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({singleProduct})});
           const data = await res.json();
-          console.log(data)
-          dispatchProduct({type:"SET_CART_PRODUCTS",payload:data})
+          dispatchProduct({type:"SET_CART_PRODUCTS",payload:data?.cartProduct})
         } catch(error){
           console.log(error)
         }
@@ -38,10 +38,8 @@ const SingleProductPage = () => {
             headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({singleProduct})
           })
-          const data = await res.json()
-          dispatchProduct({type:"SET_WISHLIST_PRODUCTS",payload:data})
-          
-    
+          const data = await res.json();
+          dispatchProduct({type:"SET_WISHLIST_PRODUCTS",payload:data?.wishlistProduct})
         }
         catch(error){
           console.log(error)
@@ -56,10 +54,12 @@ const SingleProductPage = () => {
             </div>
             <div className='m-2'>
             <h4>{singleProduct?.productName}</h4>
-                <p className='p-2 price'>Price : <span className='actual-price'>{singleProduct?.productPrice}</span><span className='p-2'>{singleProduct?.productDiscountPrice}</span></p>
+                <p className=' price'>Price : <span className='actual-price'>{singleProduct?.productPrice}</span><span className='p-2'>{singleProduct?.productDiscountPrice}</span></p>
                 <p> <h5 className='description'>Description :</h5> {singleProduct?.productDescription}</p>
-                <button type="button" onClick={ () => addToCart()} className="btn btn-dark m-2">Add to cart</button> <br/>
-                <button type="button"  onClick={()=>addToWishlist()} className="btn btn-secondary">Add to wishlist</button>
+                {cart?.find((item) => item._id === singleProduct._id) ? <button type="button" onClick= {() => navigate("/cart")}  className="btn btn-dark m-1">Go to cart</button> : <button type="button" onClick={ () => addToCart()} className="btn btn-dark m-1">Add to cart</button>}
+
+               {wishlist?.find((item) => item._id === singleProduct._id) ? <button type="button"  className="btn btn-secondary m-1" onClick= {() => navigate("/wishlist")}>Go to wishlist</button>  : <button type="button"  onClick={()=>addToWishlist()} className="btn btn-secondary m-1">Add to wishlist</button>}
+              
             </div>
         </div>
        </Layout>
