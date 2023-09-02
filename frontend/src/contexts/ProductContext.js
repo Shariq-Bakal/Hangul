@@ -14,13 +14,13 @@ const productReducer = (state,action)=>{
         case "GET_PRODUCTS":
             return {...state,products : action.payload};
         case "GET_SINGLE_PRODUCT":
-            return {...state , singleProduct : action.payload.product};
+            return {...state , singleProduct : action.payload};
         case "GET_CART_PRODUCTS":
             return {...state,cart:action.payload}
         case "SET_CART_PRODUCTS":
             return {...state,cart:[...state.cart,action.payload]}
         case "DELETE_CART_PRODUCTS":
-            return {...state,cart:state.cart.filter(product=> product._id!==action.payload._id)}
+            return {...state,cart:(state.cart.filter(product=> product._id!==action.payload._id))}
         case "GET_WISHLIST_PRODUCTS":
             return {...state,wishlist:action.payload}
         case "SET_WISHLIST_PRODUCTS":

@@ -5,28 +5,17 @@ const Header = () => {
   return (
   <nav className="navbar navbar-expand-lg">
   <div className="container-fluid">
-    <Link to="/" className="navbar-brand" href="#">Hangul</Link>
+    <Link to="/" className="navbar-brand">Hangul</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon" />
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav m-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <NavLink to="/" className="nav-link active" aria-current="page" href="#">Home</NavLink>
+          <NavLink to="/" className="nav-link " aria-current="page" >Home</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/products" className="nav-link" href="#">Products</NavLink>
-        </li>
-        <li className="nav-item dropdown">
-          <NavLink className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categories
-          </NavLink>
-          <ul className="dropdown-menu">
-            <li><NavLink className="dropdown-item" >Paper mache</NavLink></li>
-            <li><NavLink className="dropdown-item" >Pherans</NavLink></li>
-            <li><hr className="dropdown-divider" /></li>
-            <li><NavLink className="dropdown-item">Namdas</NavLink></li>
-          </ul>
+          <NavLink to="/products" className="nav-link">Products</NavLink>
         </li>
         <li className="nav-item">
           <NavLink to="/about" className="nav-link">About</NavLink>
@@ -37,13 +26,13 @@ const Header = () => {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <NavLink to="/cart" className="nav-link active" aria-current="page">Cart</NavLink>
+          <NavLink to="/cart" className="nav-link " aria-current="page"> Cart</NavLink>
         </li>
         <li className="nav-item">
           <NavLink to="/wishlist"className="nav-link">Wishlist</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link">Account</NavLink>
+          <NavLink to = "/account" className="nav-link">Account</NavLink>
         </li>
       </ul>
       <form className="d-flex" role="search">
