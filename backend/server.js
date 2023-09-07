@@ -2,6 +2,7 @@ const express = require("express")
 const multer = require("multer")
 const mongoose = require("mongoose")
 const productRouter = require("./routes/productRoutes")
+const orderRouter = require("./routes/ordersRoutes")
 require("dotenv").config()
 
 const cartRouter = require("./routes/cartRoutes")
@@ -32,9 +33,10 @@ app.use("/uploads", express.static(__dirname + "/uploads"))
 
 app.use("/api/products", upload.single("productImg"), productRouter)
 
-app.use("/api/cart" , cartRouter)
+app.use("/api/cart", cartRouter)
 
-app.use("/api/wishlist" , wishlistRouter)
+app.use("/api/wishlist", wishlistRouter)
+app.use("/api/orders", orderRouter)
 
 
 
