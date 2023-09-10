@@ -55,11 +55,11 @@ const SingleProductPage = () => {
             <div className='m-2'>
             <h4>{singleProduct?.productName}</h4>
                 <p className=' price'>Price : <span className='actual-price'>{singleProduct?.productPrice}</span><span className='p-2'>{singleProduct?.productDiscountPrice}</span></p>
-                <p> <h5 className='description'>Description :</h5> {singleProduct?.productDescription}</p>
+                <p> <strong className='description'>Description :</strong> {singleProduct?.productDescription}</p>
+                
                 {cart?.find((item) => item._id === singleProduct._id) ? <button type="button" onClick= {() => navigate("/cart")}  className="btn btn-dark m-1">Go to cart</button> : <button type="button" onClick={ () => addToCart()} className="btn btn-dark m-1">Add to cart</button>}
 
                {wishlist?.find((item) => item._id === singleProduct._id) ? <button type="button"  className="btn btn-secondary m-1" onClick= {() => navigate("/wishlist")}>Go to wishlist</button>  : <button type="button"  onClick={()=>addToWishlist()} className="btn btn-secondary m-1">Add to wishlist</button>}
-              
             </div>
         </div>
        </Layout>
