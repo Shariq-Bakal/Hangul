@@ -8,43 +8,33 @@ const getOrders = async(req, res) => {
             message: "Orders fetched successfully",
             orders
         })
-
     } catch (error) {
         res.status(500).json({
             success: false,
             message: "problem in fetching orders",
             error
         })
-
     }
 }
 
-
-
 //Post orders
 
-const addOrders = async(req, res) => {
-    const { productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, _id, productImg } = req.body;
-    console.log(req.body)
+const addOrders = async (req, res) => {
 
-
+    const {orders} = req.body
     try {
-        const orders = await Order.create({ productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, _id, productImg });
+        const currentOrders = await Order.insertMany({orders});
         res.status(201).json({
+            message: "Product added to orders successfully",
             success: true,
-            message: "Order successful",
-            totalCount: orders.length,
-            orders
-        });
-
+            currentOrders
+        })
     } catch (error) {
         res.status(500).json({
+            message: "Problem in adding product to orders",
             success: false,
-            message: "problem in ordering products",
             error
         })
-
-
     }
 }
 module.exports = {

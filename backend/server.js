@@ -36,6 +36,7 @@ app.use("/api/products", upload.single("productImg"), productRouter)
 app.use("/api/cart", cartRouter)
 
 app.use("/api/wishlist", wishlistRouter)
+
 app.use("/api/orders", orderRouter)
 
 
