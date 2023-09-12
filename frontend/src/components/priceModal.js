@@ -2,7 +2,16 @@ import React from 'react'
 import { useProducts } from '../contexts/ProductContext'
 
 const PriceModal = () => {
-const {productState : {cart}} = useProducts();
+const {productState : {cart  , } , dispatchProduct} = useProducts();
+const deliveryCharges = 99 * cart.length;
+
+var totalCartPrice = 0;
+var totalDiscountedCartPrice = 0
+
+for(let i =0; i < cart.length; i++) {
+    totalCartPrice = Number(totalCartPrice )+ Number(cart[i].productPrice);
+    totalDiscountedCartPrice = Number(totalDiscountedCartPrice) + Number(cart[i].productDiscountPrice)
+}
 
 const placeOrder = async () => {
     try {
@@ -10,8 +19,9 @@ const placeOrder = async () => {
         body: JSON.stringify({orders : cart})});
         const data = await res.json();
         console.log(data)
+        dispatchProduct({type : "SET_ORDERS" , payload : data?.currentOrders })
     } catch(e) {
-        console.log(e.message)
+        console.log(e)
     }
 }
   return (
@@ -19,19 +29,19 @@ const placeOrder = async () => {
         <p>Price Details ({cart?.length} items)</p>
         <section className='flex'>
             <span>Total MRP</span>
-            <span> Rs 1000</span>
+            <span> Rs {totalCartPrice}</span>
         </section>
         <section className='flex'>
             <span>Discounted Price </span>
-            <span> Rs 500</span>
+            <span> Rs {totalDiscountedCartPrice}</span>
         </section>
         <section className='flex'>
             <span>Delivery Charges</span>
-            <span>Rs. 99</span>
+            <span>Rs. {deliveryCharges}</span>
         </section>
         <section className='flex'>
         <span>Total Amount</span>
-            <span>Rs. 1199</span>
+            <span>Rs. {totalDiscountedCartPrice + deliveryCharges}</span>
         </section>
         
         <button type="button" className="btn btn-dark checkout-btn" onClick={() => placeOrder()}>Proceed To Checkout</button> 
