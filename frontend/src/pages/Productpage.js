@@ -25,9 +25,8 @@ const Productpage = () => {
     //     const data = await res.json();
     //     var arr = []
     //    data?.orders?.map((item) => item?.orders.map((sub) => arr.push(sub)))
-    //     console.log(arr)
+    //     console.log(data)
     //   } catch(e) {
-
     //   }
     // }
 
