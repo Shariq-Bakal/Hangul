@@ -24,6 +24,7 @@ const addProductToCart = async(req, res) => {
     //Destructuring property names from product object which is inside body itself
 
     const { productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory , _id, productImg } = req.body.singleProduct;
+    
     try {
         const cartProduct = await Cart.create({ _id , productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg });
 

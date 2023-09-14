@@ -19,20 +19,8 @@ const Productpage = () => {
       }
     }
 
-    // const getOrders = async () => {
-    //   try { 
-    //     const res = await fetch("/api/orders");
-    //     const data = await res.json();
-    //     var arr = []
-    //    data?.orders?.map((item) => item?.orders.map((sub) => arr.push(sub)))
-    //     console.log(data)
-    //   } catch(e) {
-    //   }
-    // }
-
     useEffect(()=>{
         fetchProducts();
-        // getOrders();
       },[])
     
       const getSingleProduct = async (product) => {

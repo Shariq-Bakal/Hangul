@@ -6,7 +6,10 @@ const initialState = {
     products:[],
     singleProduct : {},
     cart:[],
+    totalCartPrice: 0,
+    totalDiscountedCartPrice : 0,
     wishlist:[],
+    orders : []
 }
 
 const productReducer = (state,action)=>{
@@ -27,6 +30,10 @@ const productReducer = (state,action)=>{
             return {...state,wishlist:[...state.wishlist,action.payload]}
         case "DELETE_WISHLIST_PRODUCTS":
             return {...state,wishlist:state.wishlist.filter(product=>product._id!==action.payload._id)}
+        case "GET_ORDERS" :
+            return {...state , orders : action.payload}
+        case "SET_ORDERS" :
+            return {...state , orders : [...state.orders , action.payload]}
         default :
             return  state
     }

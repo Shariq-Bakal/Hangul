@@ -22,7 +22,7 @@ const SingleProductPage = () => {
     const addToCart = async () => {
         try {
           const res = await fetch(`/api/cart/${singleProduct._id}` , {method : "POST", headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({singleProduct})});
+          body: JSON.stringify({singleProduct , currentProductPrice : singleProduct.productPrice})});
           const data = await res.json();
           dispatchProduct({type:"SET_CART_PRODUCTS",payload:data?.cartProduct})
         } catch(error){
