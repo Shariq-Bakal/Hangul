@@ -10,7 +10,6 @@ const UserSchema = new Schema({
         unique: true,
         lowercase: true,
         validate: [isEmail, "Email is not valid"]
-
     },
     password: {
         type: String,
@@ -24,7 +23,19 @@ UserSchema.pre("save", async function(next) {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt)
     next();
-
 })
+
+UserSchema.statics.login = async function (email,password) {
+    const user = await this.findOne({email});
+    if(!user) {
+        throw Error ("incorrect email")
+    }
+    const isPasswordEqual = await bcrypt.compare(password , user.password);
+    if(!isPasswordEqual) {
+        throw Error ("incorrect password")
+    }
+
+    return user;
+}
 
 module.exports = mongoose.model("User", UserSchema);
