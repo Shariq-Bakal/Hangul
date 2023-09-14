@@ -2,7 +2,8 @@ const express = require("express")
 const multer = require("multer")
 const mongoose = require("mongoose")
 const productRouter = require("./routes/productRoutes")
-const orderRouter = require("./routes/ordersRoutes")
+const orderRouter = require("./routes/ordersRoutes");
+const userRouter = require("./routes/userRoutes");
 require("dotenv").config()
 
 const cartRouter = require("./routes/cartRoutes")
@@ -38,6 +39,7 @@ app.use("/api/cart", cartRouter)
 app.use("/api/wishlist", wishlistRouter)
 
 app.use("/api/orders", orderRouter)
+app.use("/api/user", userRouter)
 
 
 
