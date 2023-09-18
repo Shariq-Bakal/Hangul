@@ -8,6 +8,31 @@ const createToken = (id) => {
     })
 }
 
+const handleErrors = (error) => {
+    console.log(error.message , error.code);
+    let errors = {email : '' , password : ''};
+
+    if(error.message === "incorrect email") {
+        errors.email = "Email is not registered"
+    }
+
+    if(error.message === "incorrect password") {
+        errors.email = " Incorrect Password"
+    }
+
+    if(error.code === 11000) {
+        errors.email = "Email already registered!"
+        return errors
+    }
+
+    if(error.message.includes("User validation failed")) {
+        Object.values(error.errors).forEach(({properties}) => {
+            errors[properties.path] = properties.message
+        })
+    }
+    return errors
+}
+
 //Sign up function
 
 const signup = async(req, res) => {
@@ -19,19 +44,18 @@ const signup = async(req, res) => {
         res.status(201).json({
             message: "Sign up is Successful",
             success: true,
-            user,
+            user :  {id : user._id, email : user.email},
             token
         })
     } catch (error) {
-        console.log(error)
+        const errors = handleErrors(error);
         res.status(500).json({
-            message: "Problem in signingup",
+            message: "Problem in signing up",
             success: false,
-            error
+            errors
         })
     }
 }
-
 
 //Login function
 
@@ -44,21 +68,19 @@ const login = async (req,res) => {
         res.status(200).json({
             message: "Login is Successful",
             success: true,
-            user,
+            user :  {id : user._id, email : user.email},
             token
         })
     }
     catch(error) {
-        console.log(error)
+        const errors = handleErrors(error);
         res.status(500).json({
             message: "Problem in loggging in user",
             success: false,
-            error
+            errors
         })
     }
 }
-
-
 
 module.exports = {
     signup,
