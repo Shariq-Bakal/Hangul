@@ -9,15 +9,22 @@ const createToken = (id) => {
 }
 
 const handleErrors = (error) => {
-    console.log(error.message , error.code);
     let errors = {email : '' , password : ''};
+
+    if(error.message === "Email is required") {
+        errors.email = "Email is required"
+    }
+
+    if(error.message === "Password is required") {
+        errors.password = "Password is required"
+    }
 
     if(error.message === "incorrect email") {
         errors.email = "Email is not registered"
     }
 
     if(error.message === "incorrect password") {
-        errors.email = " Incorrect Password"
+        errors.password = " Incorrect Password"
     }
 
     if(error.code === 11000) {
@@ -36,7 +43,7 @@ const handleErrors = (error) => {
 //Sign up function
 
 const signup = async(req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body.userInfo;
     try {
         const user = await User.create({ email, password });
         const token = createToken(user._id)
@@ -60,7 +67,7 @@ const signup = async(req, res) => {
 //Login function
 
 const login = async (req,res) => {
-    const {email , password} = req.body;
+    const {email , password} = req.body.userInfo;
     try{
         const user = await User.login(email,password)
         const token = createToken(user._id)

@@ -14,7 +14,7 @@
 }
 
 .active {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #212529;
 }
 
 .product-container{
@@ -95,4 +95,31 @@
 
 .product-card{
     max-width: 23vw;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+}
+
+.auth-form{
+    box-shadow: 0 6px 10px -6px #212529;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 3rem auto;
+    width: 20rem;
+}
+
+.link-wrapper{
+    text-align: center;
+    margin-top: 5px;
+}
+
+.link:hover{
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+.error-msg{
+    color: red;
 }
