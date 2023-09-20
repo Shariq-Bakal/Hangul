@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import {NavLink,Link, useNavigate} from "react-router-dom"
 import { useAuth } from '../contexts/AuthContext'
 
@@ -11,8 +11,23 @@ const Header = () => {
     const res = await fetch("/api/user/logout");
     const data = await res.json();
     dispatchAuth({type : "LOGOUT" , payload : data.token})
+    localStorage.removeItem("AUTH_TOKEN")
     navigate("/login")
   }
+
+  const getUserInfo =  async () => {
+    const res = await fetch("/api/user/profile" , {
+      method: "POST",
+      headers : {"Content-Type" : "appliction/json"},
+     })
+     
+     const data = await res.json();
+     console.log(data.id)
+  }
+
+  useEffect( () => {
+   getUserInfo()
+  },[])
 
   return (
   <nav className="navbar navbar-expand-lg">

@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 const LoginPage = () => {
     const [userInfo , setUserInfo] = useState({email : "" , password : ""});
-    const {errors , setErrors , dispatchAuth } = useAuth();
+    const {errors , setErrors , dispatchAuth} = useAuth();
     const navigate = useNavigate();
     
     const loginHandler = async (e) => {
@@ -32,6 +32,7 @@ const LoginPage = () => {
             console.log(e)
         }
     }
+
   return (
     <Layout>
     <form onSubmit={loginHandler} className='auth-form'>

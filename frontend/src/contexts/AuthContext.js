@@ -2,7 +2,7 @@ import {useReducer , createContext, useContext, useState} from "react"
 
 const initialState = {
     loggedInUser : null,
-    token : null,
+    token : localStorage.getItem("AUTH_TOKEN") || "",
     authStatus : localStorage.getItem("AUTH_TOKEN") ? true : false
 }
 

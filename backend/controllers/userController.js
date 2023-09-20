@@ -47,7 +47,7 @@ const signup = async(req, res) => {
     try {
         const user = await User.create({ email, password });
         const token = createToken(user._id)
-        res.cookie("jwt" , token , {maxAge : maxAge * 1000})
+        res.cookie("token" , token , {maxAge : maxAge * 1000})
         res.status(201).json({
             message: "Sign up is Successful",
             success: true,
@@ -71,7 +71,7 @@ const login = async (req,res) => {
     try{
         const user = await User.login(email,password)
         const token = createToken(user._id)
-        res.cookie("jwt" , token , {maxAge : maxAge * 1000})
+        res.cookie("token" , token , {maxAge : maxAge * 1000})
         res.status(200).json({
             message: "Login is Successful",
             success: true,
@@ -90,7 +90,7 @@ const login = async (req,res) => {
 }
 
 const logout = (req,res) => {
-    res.cookie("jwt" , "")
+    res.cookie("token" , "")
     res.status(200).json({
         success : true,
         message: "Logout succcessfull",
@@ -98,8 +98,17 @@ const logout = (req,res) => {
     })
 }
 
+const getUserInfo = ((req,res) => {
+    const {token} = req.cookies;
+    jwt.verify(token , process.env.SECRET_KEY , {} , (err,info) => {
+        if(err) throw err;
+        res.json(info)
+    })
+})
+
 module.exports = {
     signup,
     login,
-    logout
+    logout,
+    getUserInfo
 }
