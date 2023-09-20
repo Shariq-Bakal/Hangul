@@ -2,7 +2,7 @@ import React from 'react'
 import { useProducts } from '../contexts/ProductContext'
 
 const PriceModal = () => {
-const {productState : {cart  , } , dispatchProduct} = useProducts();
+const {productState : {cart} , dispatchProduct} = useProducts();
 const deliveryCharges = 99 * cart.length;
 
 var totalCartPrice = 0;
@@ -27,19 +27,19 @@ const placeOrder = async () => {
   return (
     <section className='price-modal p-3'>
         <p>Price Details ({cart?.length} items)</p>
-        <section className='flex'>
+        <section className='flex-sb'>
             <span>Total MRP</span>
             <span> Rs {totalCartPrice}</span>
         </section>
-        <section className='flex'>
+        <section className='flex-sb'>
             <span>Discounted Price </span>
             <span> Rs {totalDiscountedCartPrice}</span>
         </section>
-        <section className='flex'>
+        <section className='flex-sb'>
             <span>Delivery Charges</span>
             <span>Rs. {deliveryCharges}</span>
         </section>
-        <section className='flex'>
+        <section className='flex-sb'>
         <span>Total Amount</span>
             <span>Rs. {totalDiscountedCartPrice + deliveryCharges}</span>
         </section>

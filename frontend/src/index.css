@@ -14,13 +14,18 @@
 }
 
 .active {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #212529;
 }
 
 .product-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.wishlist-container{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .product-container div { 
@@ -95,4 +100,37 @@
 
 .product-card{
     max-width: 23vw;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+}
+
+.flex-sb{
+    display: flex;
+    justify-content: space-between;
+    margin: 0rem 0.5rem 1rem 0.5rem;
+}
+
+.auth-form{
+    box-shadow: 0 6px 10px -6px #212529;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 3rem auto;
+    width: 20rem;
+}
+
+.link-wrapper{
+    text-align: center;
+    margin-top: 5px;
+}
+
+.link:hover{
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+.error-msg{
+    color: red;
 }

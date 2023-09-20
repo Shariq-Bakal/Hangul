@@ -1,7 +1,19 @@
 import React from 'react'
-import {NavLink,Link} from "react-router-dom"
+import {NavLink,Link, useNavigate} from "react-router-dom"
+import { useAuth } from '../contexts/AuthContext'
 
 const Header = () => {
+
+  const { authState : {authStatus} , dispatchAuth} = useAuth();
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    const res = await fetch("/api/user/logout");
+    const data = await res.json();
+    dispatchAuth({type : "LOGOUT" , payload : data.token})
+    navigate("/login")
+  }
+
   return (
   <nav className="navbar navbar-expand-lg">
   <div className="container-fluid">
@@ -20,6 +32,10 @@ const Header = () => {
         <li className="nav-item">
           <NavLink to="/about" className="nav-link">About</NavLink>
         </li>
+       { authStatus ? <button type="btn" className="btn btn-secondary m-1" onClick={logoutHandler} >Logout</button>
+        : <li className="nav-item">
+          <NavLink to="/login" className="nav-link">Login</NavLink>
+        </li>}
       </ul>
     </div>
 
