@@ -30,7 +30,7 @@ const WishlistPage = () => {
 
     return (
         <Layout>
-            <div className='wishlist-container'>
+            <div className='product-container'>
             {
             wishlist?.map(product=><div key={product?._id} className='m-2 product-card'>
             <img src= {product?.productImg} className="img-fluid" alt= {product?.productName} />
