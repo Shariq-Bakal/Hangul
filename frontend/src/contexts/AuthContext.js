@@ -1,15 +1,18 @@
 import {useReducer , createContext, useContext, useState} from "react"
 
 const initialState = {
-    user : null,
+    loggedInUser : null,
     token : null,
-    authStatus : false
+    authStatus : localStorage.getItem("AUTH_TOKEN") ? true : false
 }
 
 const authReducer = (state,action) => {
      switch(action.type) {
-        case "LOGIN" :
-            return {...state , user : action.payload}
+        case "SIGIN_IN_USER" :
+            const {user , token} = action.payload
+            return {...state , loggedInUser : user , token : token , authStatus : true}
+        case "LOGOUT" :
+            return {...state , loggedInUser : null , token  : action.payload , authStatus : false}
         default :
             return {...state}
      }

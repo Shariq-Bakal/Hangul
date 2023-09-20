@@ -12,10 +12,9 @@ const WishlistPage = () => {
     const getWishlistProducts = async ()=>{
         const res = await fetch(`/api/wishlist`);
         const data = await res.json();
-        console.log(data)
-        
         dispatchProduct({type:"GET_WISHLIST_PRODUCTS",payload:data.wishlistProducts});
     }
+
     const removeFromWishlist = async (product)=>{
         const res = await fetch(`/api/wishlist/${product._id}`,{
             method:"DELETE",
@@ -28,11 +27,12 @@ const WishlistPage = () => {
     useEffect(()=>{
         getWishlistProducts();
     },[])
+
     return (
         <Layout>
-            <div className='product-container'>
+            <div className='wishlist-container'>
             {
-            wishlist?.map(product=><div key={product?._id} className='m-2'>
+            wishlist?.map(product=><div key={product?._id} className='m-2 product-card'>
             <img src= {product?.productImg} className="img-fluid" alt= {product?.productName} />
               <h4 className='p-2'>{product?.productName}</h4>
               <p className='p-2'>Price : <span className='actual-price'>{product?.productPrice}</span><span className='p-2'>{product?.productDiscountPrice}</span></p>

@@ -20,7 +20,7 @@ const SignupPage = () => {
 
           if(data.success) {
             localStorage.setItem("AUTH_TOKEN" , data.token)
-            dispatchAuth({type : "LOGIN" , payload : data.user})
+            dispatchAuth({type : "SIGIN_IN_USER" , payload : data})
             setUserInfo({...userInfo , email : "" , password : ""})
             navigate("/")
           }

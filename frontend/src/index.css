@@ -23,6 +23,11 @@
     justify-content: center;
 }
 
+.wishlist-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .product-container div { 
     box-shadow: 0 6px 10px -7px grey;
 }
@@ -100,6 +105,12 @@
 .flex{
     display: flex;
     justify-content: center;
+}
+
+.flex-sb{
+    display: flex;
+    justify-content: space-between;
+    margin: 0rem 0.5rem 1rem 0.5rem;
 }
 
 .auth-form{

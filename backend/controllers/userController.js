@@ -89,7 +89,17 @@ const login = async (req,res) => {
     }
 }
 
+const logout = (req,res) => {
+    res.cookie("jwt" , "")
+    res.status(200).json({
+        success : true,
+        message: "Logout succcessfull",
+        token : ""
+    })
+}
+
 module.exports = {
     signup,
-    login
+    login,
+    logout
 }
