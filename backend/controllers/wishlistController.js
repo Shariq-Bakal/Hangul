@@ -33,22 +33,22 @@ const addProductToWishlist = async(req, res) => {
 
     const {token} = req.cookies;
 
-
     try {
         jwt.verify(token , process.env.SECRET_KEY , {} , async (err , info ) => {
             if (err) throw err
-            const user = await User.findById({_id : info.id}).populate("wishlist")
+            const user = await User.findById(info.id)
             user.wishlist.push(_id)
             const response = await user.save();
+            console.log(response)
+
             res.status(201).json({
                 message: "Product added to wishlist successfully",
                 success: true,
-                response : response.wishlist
+                response
             })
         })
         // const wishlistProduct = await Wishlist.create({ _id , productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg });
      
-
     } catch (error) {
         console.log(error)
         res.status(500).json({
