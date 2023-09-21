@@ -11,7 +11,6 @@ const SingleProductPage = () => {
     const getSingleProduct = async () => {
         const res = await fetch(`/api/products/${id}`)
         const singleProd = await res.json()
-        console.log(singleProd)
         dispatchProduct({type: "GET_SINGLE_PRODUCT", payload : singleProd?.product})
     }
 
@@ -40,9 +39,9 @@ const SingleProductPage = () => {
             body: JSON.stringify({singleProduct})
           })
           const data = await res.json();
-          
-          const wishlistProduct = data.response.find((item) => item._id === singleProduct._id)
-          dispatchProduct({type:"SET_WISHLIST_PRODUCTS", payload: wishlistProduct})
+          console.log(data)
+          // const wishlistProduct = data.response.find((item) => item._id === singleProduct._id)
+          dispatchProduct({type:"SET_WISHLIST_PRODUCTS", payload: singleProduct})
         }
         catch(error){
           console.log(error)
