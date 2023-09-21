@@ -5,7 +5,7 @@ import { useProducts } from '../contexts/ProductContext';
 
 const SingleProductPage = () => {
     const {id} = useParams();
-    const {dispatchProduct , productState : {singleProduct , cart , wishlist} } = useProducts();
+    const {dispatchProduct , productState : {singleProduct , cart , wishlist , products} } = useProducts();
     const navigate = useNavigate();
 
     const getSingleProduct = async () => {
@@ -24,6 +24,7 @@ const SingleProductPage = () => {
           const res = await fetch(`/api/cart/${singleProduct._id}` , {method : "POST", headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({singleProduct , currentProductPrice : singleProduct.productPrice})});
           const data = await res.json();
+          console.log(data)
           dispatchProduct({type:"SET_CART_PRODUCTS",payload:data?.cartProduct})
         } catch(error){
           console.log(error)
@@ -36,10 +37,12 @@ const SingleProductPage = () => {
           const res = await fetch(`/api/wishlist/${singleProduct._id}`,{
             method:"POST",
             headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({singleProduct})
+            body: JSON.stringify({singleProduct})
           })
           const data = await res.json();
-          dispatchProduct({type:"SET_WISHLIST_PRODUCTS",payload:data?.wishlistProduct})
+          
+          const wishlistProduct = data.response.find((item) => item._id === singleProduct._id)
+          dispatchProduct({type:"SET_WISHLIST_PRODUCTS", payload: wishlistProduct})
         }
         catch(error){
           console.log(error)

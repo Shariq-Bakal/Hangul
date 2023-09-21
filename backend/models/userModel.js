@@ -15,7 +15,11 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         minlength: [8, "Password should be greater than or equal to 8"]
-    }
+    },
+    wishlist : [{
+        type : Schema.Types.ObjectId,
+        ref : "Model"
+    }]
 
 });
 

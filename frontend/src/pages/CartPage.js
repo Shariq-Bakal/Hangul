@@ -6,6 +6,7 @@ import { useProducts } from '../contexts/ProductContext';
 
 const CartPage = () => {
     const {productState:{cart},dispatchProduct} = useProducts()
+
     const getCartProducts = async ()=>{
         const res = await fetch("/api/cart");
         const data = await res.json();
@@ -23,7 +24,6 @@ const CartPage = () => {
             body: JSON.stringify({product})
         });
         const data = await res.json();
-        console.log(data)
         dispatchProduct({type:"DELETE_CART_PRODUCTS",payload:data?.product})
     }
     

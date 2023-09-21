@@ -2,10 +2,6 @@ import React, { useEffect } from 'react';
 import Layout from '../components/Layout';
 import { useProducts } from '../contexts/ProductContext';
 
-
-
-
-
 const WishlistPage = () => {
     const {productState:{wishlist},dispatchProduct} = useProducts()
 
@@ -21,8 +17,7 @@ const WishlistPage = () => {
             headers: { 'Content-Type': 'application/json' },
         });
         const data = await res.json();
-        dispatchProduct({type:"DELETE_WISHLIST_PRODUCTS",payload:data.product})
-        
+        dispatchProduct({type:"DELETE_WISHLIST_PRODUCTS",payload:data.product})   
     }
     useEffect(()=>{
         getWishlistProducts();
