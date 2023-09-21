@@ -39,6 +39,7 @@ const addProductToWishlist = async(req, res) => {
             const user = await User.findById(info.id)
             user.wishlist.push(_id)
             const response = await user.save();
+            
             console.log(response)
 
             res.status(201).json({
