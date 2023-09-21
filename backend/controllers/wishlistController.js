@@ -1,14 +1,22 @@
 const Wishlist = require("../models/wishlistModel");
+const jwt = require("jsonwebtoken");
+const User = require("../models/userModel")
 
 const getWishlistProducts = async(req, res) => {
+    const {token} = req.cookies
     try {
-        const wishlistProducts = await Wishlist.find({});
-        res.status(200).json({
-            success: true,
-            message: "All Wishlist products",
-            totalCount: wishlistProducts.length,
-            wishlistProducts
-        });
+        jwt.verify(token , process.env.SECRET_KEY , {} , async (err , info ) => {
+            if (err) throw err
+            const user = await User.findById({_id : info.id}).populate("wishlist")
+            const wishlistProducts = user.wishlist
+            res.status(200).json({
+                success: true,
+                message: "All Wishlist products",
+                totalCount: wishlistProducts.length,
+                wishlistProducts
+            });
+        })
+
 
     } catch (error) {
         console.log(error)
@@ -23,13 +31,23 @@ const getWishlistProducts = async(req, res) => {
 const addProductToWishlist = async(req, res) => {
     const { _id , productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg } = req.body.singleProduct;
 
+    const {token} = req.cookies;
+
+
     try {
-        const wishlistProduct = await Wishlist.create({ _id , productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg });
-        res.status(201).json({
-            message: "Product added to wishlist successfully",
-            success: true,
-            wishlistProduct
+        jwt.verify(token , process.env.SECRET_KEY , {} , async (err , info ) => {
+            if (err) throw err
+            const user = await User.findById({_id : info.id}).populate("wishlist")
+            user.wishlist.push(_id)
+            const response = await user.save();
+            res.status(201).json({
+                message: "Product added to wishlist successfully",
+                success: true,
+                response : response.wishlist
+            })
         })
+        // const wishlistProduct = await Wishlist.create({ _id , productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg });
+     
 
     } catch (error) {
         console.log(error)
