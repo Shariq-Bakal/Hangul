@@ -36,9 +36,9 @@ const Productpage = () => {
         <Layout>
         <div className='product-container'>
         {products?.map((product) => <div key={product?._id} className='m-2 product-card' onClick={() => getSingleProduct(product)}>
-          <img src= {product?.productImg} className="img-fluid" alt= {product?.productName} />
+          <img src= {product?.productImg} className="img-fluid product-img" alt= {product?.productName} />
             <h4 className='p-2'>{product?.productName}</h4>
-            <p className='p-2'>Price : <span className='actual-price'>{product?.productPrice}</span><span className='p-2'>{product?.productDiscountPrice}</span></p>
+            <p className='p-2'>Rs.<span className='p-2 actual-price'>{product?.productDiscountPrice}</span><span>{product?.productPrice}</span></p>
           </div>)}
         </div>
   </Layout> 
