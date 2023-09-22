@@ -16,8 +16,6 @@ const getWishlistProducts = async(req, res) => {
                 wishlistProducts
             });
         })
-
-
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -29,28 +27,29 @@ const getWishlistProducts = async(req, res) => {
 }
 
 const addProductToWishlist = async(req, res) => {
-    const { _id , productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg } = req.body.singleProduct;
+    const { _id } = req.body.singleProduct;
 
     const {token} = req.cookies;
 
     try {
-        jwt.verify(token , process.env.SECRET_KEY , {} , async (err , info ) => {
+        jwt.verify(token , process.env.SECRET_KEY , {} , async ( err , info ) => {
             if (err) throw err
-            const user = await User.findById(info.id)
-            user.wishlist.push(_id)
-            const response = await user.save();
-            console.log(response)
+            const user = await User.findByIdAndUpdate(
+                info.id,{
+                $push : {wishlist : _id},    
+                },
+                {
+                    new : true
+                })
 
             res.status(201).json({
                 message: "Product added to wishlist successfully",
                 success: true,
-                response
+                productId : _id
             })
         })
-        // const wishlistProduct = await Wishlist.create({ _id , productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg });
      
     } catch (error) {
-        console.log(error)
         res.status(500).json({
             message: "Problem in adding product to wishlist",
             success: false,
@@ -62,12 +61,23 @@ const addProductToWishlist = async(req, res) => {
 //removing wishlist
 const removeProductFromWishlist = async(req, res) => {
     const { id } = req.params
+    const {token} = req.cookies
     try {
-        const product = await Wishlist.findByIdAndDelete({ _id: id })
-        res.status(201).json({
-            message: "Product removed from wishlist successfully",
-            success: true,
-            product
+        jwt.verify(token , process.env.SECRET_KEY , {} , async (err , info ) => {
+            if (err) throw err
+            const user = await User.findByIdAndUpdate(
+                info.id,{
+                $pull : {wishlist : id},    
+                },
+                {
+                    new : true
+                })
+
+            res.status(201).json({
+                message: "Product deleted from wishlist successfully",
+                success: true,
+                productId : id
+            })
         })
 
     } catch (error) {
@@ -76,10 +86,7 @@ const removeProductFromWishlist = async(req, res) => {
             success: false,
             error
         })
-
     }
-
-
 }
 
 module.exports = {

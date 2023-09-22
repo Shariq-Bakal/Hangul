@@ -5,7 +5,7 @@ import { useProducts } from '../contexts/ProductContext';
 
 const SingleProductPage = () => {
     const {id} = useParams();
-    const {dispatchProduct , productState : {singleProduct , cart , wishlist , products} } = useProducts();
+    const {dispatchProduct , productState : {singleProduct , cart , wishlist , products } } = useProducts();
     const navigate = useNavigate();
 
     const getSingleProduct = async () => {
@@ -14,8 +14,23 @@ const SingleProductPage = () => {
         dispatchProduct({type: "GET_SINGLE_PRODUCT", payload : singleProd?.product})
     }
 
+    const getWishlistProducts = async ()=>{
+      const res = await fetch(`/api/wishlist`);
+      const data = await res.json();
+      dispatchProduct({type:"GET_WISHLIST_PRODUCTS",payload:data.wishlistProducts});
+  }
+
+  const getCartProducts = async ()=>{
+    const res = await fetch("/api/cart");
+    const data = await res.json();
+    dispatchProduct({type:"GET_CART_PRODUCTS",payload:data?.cartProducts})
+}
+
+
     useEffect(() => {
         getSingleProduct();
+        getWishlistProducts();
+        getCartProducts();
     },[])
 
     const addToCart = async () => {
@@ -23,8 +38,8 @@ const SingleProductPage = () => {
           const res = await fetch(`/api/cart/${singleProduct._id}` , {method : "POST", headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({singleProduct , currentProductPrice : singleProduct.productPrice})});
           const data = await res.json();
-          console.log(data)
-          dispatchProduct({type:"SET_CART_PRODUCTS",payload:data?.cartProduct})
+          const cartProduct = products.find((item) => item._id === data.productId)
+          dispatchProduct({type:"SET_CART_PRODUCTS",payload:cartProduct})
         } catch(error){
           console.log(error)
         }
@@ -39,9 +54,8 @@ const SingleProductPage = () => {
             body: JSON.stringify({singleProduct})
           })
           const data = await res.json();
-          console.log(data)
-          // const wishlistProduct = data.response.find((item) => item._id === singleProduct._id)
-          dispatchProduct({type:"SET_WISHLIST_PRODUCTS", payload: singleProduct})
+          const wishlistProduct = products.find((item) => item._id === data.productId)
+          dispatchProduct({type:"SET_WISHLIST_PRODUCTS", payload: wishlistProduct})
         }
         catch(error){
           console.log(error)
