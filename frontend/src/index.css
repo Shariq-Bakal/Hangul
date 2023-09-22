@@ -32,7 +32,7 @@
     box-shadow: 0 6px 10px -7px grey;
 }
 
-.product-container p { 
+.product-container p .actual-price { 
     font-weight: 550;
     font-size: 1.1rem;
 }
@@ -48,6 +48,12 @@
 .product-img{
     max-width: 50vw;
     max-height: 75vh;
+}
+
+.product-img:hover{
+    transition: .5s ease-in-out;
+	transform: scale(0.9);
+    cursor: pointer;
 }
 
 .cart-img{
