@@ -1,22 +1,22 @@
-import React  from 'react'
-import {NavLink,Link, useNavigate} from "react-router-dom"
+import React from 'react'
+import { NavLink, Link, useNavigate } from "react-router-dom"
 import { useAuth } from '../contexts/AuthContext'
 
 const Header = () => {
 
-  const { authState : {authStatus} , dispatchAuth} = useAuth();
-  const navigate = useNavigate();
+        const { authState: { authStatus }, dispatchAuth } = useAuth();
+        const navigate = useNavigate();
 
-  const logoutHandler = async () => {
-    const res = await fetch("/api/user/logout");
-    const data = await res.json();
-    dispatchAuth({type : "LOGOUT" , payload : data.token})
-    localStorage.removeItem("AUTH_TOKEN")
-    navigate("/login")
-  }
+        const logoutHandler = async() => {
+            const res = await fetch("/api/user/logout");
+            const data = await res.json();
+            dispatchAuth({ type: "LOGOUT", payload: data.token })
+            navigate("/login")
+        }
 
-  return (
-  <nav className="navbar navbar-expand-lg">
+
+
+  return ( <nav className="navbar navbar-expand-lg">
   <div className="container-fluid">
     <Link to="/" className="navbar-brand">Hangul</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,4 +62,5 @@ const Header = () => {
   )
 }
 
-export default Header
+
+        export default Header

@@ -8,7 +8,6 @@ import WishlistPage from "./pages/WishlistPage";
 import AccountPage from "./pages/AccountPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import RequiresAuth from "./components/RequiresAuth";
 
 function App() {
   return (
@@ -18,9 +17,9 @@ function App() {
       <Route path="/about" element={<About/>} />
       <Route path="/products" element={<Productpage/>} />
       <Route path={`products/:id`} element={<SingleProductPage/>} />  
-      <Route path="/cart" element={<RequiresAuth> <CartPage/> </RequiresAuth>} />
-      <Route path="/wishlist" element={<RequiresAuth> <WishlistPage/> </RequiresAuth>}/>
-      <Route path="/account" element={<RequiresAuth> <AccountPage /> </RequiresAuth>}/>
+      <Route path="/cart" element={<CartPage/>} />
+      <Route path="/wishlist" element={<WishlistPage/>}/>
+      <Route path="/account" element={<AccountPage/>}/>
       <Route path="/login" element = {<LoginPage />} />
       <Route path="/signup" element = {<SignupPage />} />
     </Routes>
