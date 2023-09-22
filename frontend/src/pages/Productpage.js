@@ -28,7 +28,6 @@ const Productpage = () => {
           navigate(`/products/${product._id}`)
           const res = await fetch(`/api/products/${product._id}`);
           const singleProduct = await res.json();
-          console.log(singleProduct)
         } catch(error) {
           console.log(error)
         }

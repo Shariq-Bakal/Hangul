@@ -24,7 +24,7 @@ const CartPage = () => {
             body: JSON.stringify({product})
         });
         const data = await res.json();
-        dispatchProduct({type:"DELETE_CART_PRODUCTS",payload:data?.product})
+        dispatchProduct({type:"DELETE_CART_PRODUCTS",payload:data.productId})
     }
     
     return (
