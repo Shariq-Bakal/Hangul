@@ -1,20 +1,21 @@
 const Cart = require("../models/cartModel");
 const jwt = require("jsonwebtoken");
+const User = require("../models/userModel")
 
 const getCartProducts = async(req, res) => {
+    const {token} = req.cookies
     try {
-        const {token} = req.cookies;
-        jwt.verify(token , process.env.SECRET_KEY , {} , async (err , info) => {
-            if(err) throw err
-            const cartProducts = await Cart.find({user : info.id});
+        jwt.verify(token , process.env.SECRET_KEY , {} , async (err , info ) => {
+            if (err) throw err
+            const user = await User.findById({_id : info.id}).populate("cart")
+            const cartProducts = user.cart
             res.status(200).json({
                 success: true,
-                message: "All Cart products",
+                message: "All cart products",
                 totalCount: cartProducts.length,
                 cartProducts
             });
         })
-
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -26,31 +27,35 @@ const getCartProducts = async(req, res) => {
 }
 
 const addProductToCart = (req, res) => {
-
-    const { productName, productPrice, productDescription, productDiscountPrice, Cod, productsCategory , _id, productImg } = req.body.singleProduct;
+    const { _id } = req.body.singleProduct;
 
     const {token} = req.cookies;
-    jwt.verify(token , process.env.SECRET_KEY , {} , async (err , info ) => {
-        if (err) throw err
-        const user = info;
-        try {
-            const cartProduct = await Cart.create({ _id , productName, user : user.id, productPrice, productDescription, productDiscountPrice, Cod, productsCategory, productImg });
-    
+
+    try {
+        jwt.verify(token , process.env.SECRET_KEY , {} , async ( err , info ) => {
+            if (err) throw err
+            const user = await User.findByIdAndUpdate(
+                info.id,{
+                $push : {cart : _id},    
+                },
+                {
+                    new : true
+                })
+
             res.status(201).json({
                 message: "Product added to cart successfully",
                 success: true,
-                cartProduct
+                productId : _id
             })
-        } catch (error) {
-            res.status(500).json({
-                message: "Problem in adding product to cart",
-                success: false,
-                error
-            })
-        }
-    })
-    
-
+        })
+     
+    } catch (error) {
+        res.status(500).json({
+            message: "Problem in adding product to cart",
+            success: false,
+            error
+        })
+    }
 }
 
 // Removing cart products
@@ -58,24 +63,32 @@ const addProductToCart = (req, res) => {
 const removeCartProduct = async(req, res) => {
 
     const { id } = req.params
+    const {token} = req.cookies
     try {
-        const product = await Cart.findByIdAndDelete({ _id: id })
-        res.status(201).json({
-            message: "Product deleted successfully",
-            success: true,
-            product
+        jwt.verify(token , process.env.SECRET_KEY , {} , async (err , info ) => {
+            if (err) throw err
+            const user = await User.findByIdAndUpdate(
+                info.id,{
+                $pull : {cart : id},    
+                },
+                {
+                    new : true
+                })
+
+            res.status(201).json({
+                message: "Product deleted from cart successfully",
+                success: true,
+                productId : id
+            })
         })
 
     } catch (error) {
-        console.log(error)
         res.status(500).json({
-            message: "Problem in deleting product from cart",
+            message: "Problem in removing product from cart",
             success: false,
             error
         })
-
     }
-
 }
 
 module.exports = {

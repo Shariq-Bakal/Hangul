@@ -15,20 +15,6 @@ const Header = () => {
     navigate("/login")
   }
 
-  // const getUserInfo =  async () => {
-  //   const res = await fetch("/api/user/profile" , {
-  //     method: "POST",
-  //     headers : {"Content-Type" : "appliction/json"},
-  //    })
-     
-  //    const data = await res.json();
-  //    console.log(data.id)
-  // }
-
-  // useEffect( () => {
-  //  getUserInfo()
-  // },[])
-
   return (
   <nav className="navbar navbar-expand-lg">
   <div className="container-fluid">

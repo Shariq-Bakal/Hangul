@@ -17,7 +17,7 @@ const WishlistPage = () => {
             headers: { 'Content-Type': 'application/json' },
         });
         const data = await res.json();
-        dispatchProduct({type:"DELETE_WISHLIST_PRODUCTS",payload:data.product})   
+        dispatchProduct({type:"DELETE_WISHLIST_PRODUCTS",payload:data.productId})   
     }
     useEffect(()=>{
         getWishlistProducts();

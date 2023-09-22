@@ -19,6 +19,10 @@ const UserSchema = new Schema({
     wishlist : [{
         type : Schema.Types.ObjectId,
         ref : "Model"
+    }],
+    cart : [{
+        type : Schema.Types.ObjectId,
+        ref : "Model",
     }]
 
 });
