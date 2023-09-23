@@ -9,6 +9,7 @@ import AccountPage from "./pages/AccountPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import RequiresAuth from "./components/RequiresAuth";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
       <Route path="/account" element={<RequiresAuth> <AccountPage /> </RequiresAuth>}/>
       <Route path="/login" element = {<LoginPage />} />
       <Route path="/signup" element = {<SignupPage />} />
+      <Route path="/checkout-success" element = {<CheckoutSuccess />} />
+
     </Routes>
   </>
   );
