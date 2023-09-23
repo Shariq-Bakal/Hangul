@@ -1,5 +1,6 @@
 const express = require("express")
 const multer = require("multer")
+const cors = require("cors")
 const mongoose = require("mongoose")
 const cookieParser = require("cookie-parser");
 const productRouter = require("./routes/productRoutes")
@@ -9,6 +10,7 @@ require("dotenv").config()
 
 const cartRouter = require("./routes/cartRoutes")
 const wishlistRouter = require("./routes/wishlistRoutes");
+const Stripe = require("./routes/stripeRoutes")
 
 const app = express();
 const { PORT, MONGODB_URL } = process.env;
@@ -29,6 +31,8 @@ const upload = multer({ dest: "uploads/" })
 //Middlewares
 app.use(express.json())
 
+app.use(cors())
+
 app.use(cookieParser())
 
 app.use(express.urlencoded({ extended: false }))
@@ -44,6 +48,8 @@ app.use("/api/wishlist", wishlistRouter)
 app.use("/api/orders", orderRouter)
 
 app.use("/api/user", userRouter)
+
+app.use("/api/Stripe" , Stripe )
 
 
 

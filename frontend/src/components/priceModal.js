@@ -1,5 +1,6 @@
 import React from 'react'
 import { useProducts } from '../contexts/ProductContext'
+import PayButton from './PayButton';
 
 const PriceModal = () => {
 const {productState : {cart} , dispatchProduct} = useProducts();
@@ -43,8 +44,9 @@ const placeOrder = async () => {
         <span>Total Amount</span>
             <span>Rs. {totalDiscountedCartPrice + deliveryCharges}</span>
         </section>
+        <PayButton cart = {cart} />
         
-        <button type="button" className="btn btn-dark checkout-btn" onClick={() => placeOrder()}>Proceed To Checkout</button> 
+        {/* <button type="button" className="btn btn-dark checkout-btn" onClick={() => placeOrder()}>Proceed To Checkout</button>  */}
     </section>
   )
 }

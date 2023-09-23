@@ -5,7 +5,7 @@ import { useProducts } from '../contexts/ProductContext';
 
 
 const CartPage = () => {
-    const {productState:{cart},dispatchProduct} = useProducts()
+    const {productState:{cart},dispatchProduct} = useProducts();
 
     const getCartProducts = async ()=>{
         const res = await fetch("/api/cart");
