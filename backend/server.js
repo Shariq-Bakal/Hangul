@@ -54,5 +54,5 @@ app.use("/api/Stripe" , Stripe )
 
 
 app.get("/", (req, res) => {
-    res.status(200).send("success")
+    res.status(200).send("successfully started")
 })
