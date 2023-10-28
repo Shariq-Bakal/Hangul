@@ -1,4 +1,4 @@
-import { createContext,useContext,useReducer, } from "react";
+import { createContext,useContext,useReducer, useState } from "react";
 
 const ProductContext = createContext();
 
@@ -40,9 +40,11 @@ const productReducer = (state,action)=>{
 }
 
 export const ProductProvider = ({children})=>{
-    const [productState,dispatchProduct] = useReducer(productReducer,initialState)
+    const [productState,dispatchProduct] = useReducer(productReducer,initialState);
+    const [isFilterOpen , setIsFilterOpen] = useState(false);
+
     return (
-        <ProductContext.Provider value={{productState,dispatchProduct}}>
+        <ProductContext.Provider value={{productState,dispatchProduct , isFilterOpen , setIsFilterOpen}}>
             {children}
         </ProductContext.Provider>
     )

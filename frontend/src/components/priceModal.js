@@ -45,9 +45,7 @@ const placeOrder = async () => {
             <span>Rs. {totalDiscountedCartPrice + deliveryCharges}</span>
         </section>
         <PayButton cart = {cart} />
-        
-        {/* <button type="button" className="btn btn-dark checkout-btn" onClick={() => placeOrder()}>Proceed To Checkout</button>  */}
-    </section>
+        </section>
   )
 }
 

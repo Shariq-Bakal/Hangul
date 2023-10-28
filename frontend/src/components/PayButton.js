@@ -4,7 +4,6 @@ import { useAuth } from '../contexts/AuthContext';
 const PayButton = ({cart}) => {
     const { authState : {loggedInUser}} = useAuth();
     const url = "http://localhost:5051/api"
-    console.log(loggedInUser)
 
 const handleCheckout = async () => {
     try {
@@ -23,7 +22,7 @@ const handleCheckout = async () => {
 
 }
   return (
-    <button onClick = {() => handleCheckout()}>Checkout</button>
+    <button type = "button" className="btn btn-dark checkout-btn" onClick = {() => handleCheckout()}>Checkout</button>
   )
 }
 
