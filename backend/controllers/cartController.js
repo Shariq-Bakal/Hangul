@@ -2,11 +2,11 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel")
 
 const getCartProducts = async(req, res) => {
-    const {token} = req.cookies
+    const { token } = req.cookies
     try {
-        jwt.verify(token , process.env.SECRET_KEY , {} , async (err , info ) => {
+        jwt.verify(token, process.env.SECRET_KEY, {}, async(err, info) => {
             if (err) throw err
-            const user = await User.findById({_id : info.id}).populate("cart")
+            const user = await User.findById({ _id: info.id }).populate("cart")
             const cartProducts = user.cart
             res.status(200).json({
                 success: true,
@@ -28,26 +28,25 @@ const getCartProducts = async(req, res) => {
 const addProductToCart = (req, res) => {
     const { _id } = req.body.singleProduct;
 
-    const {token} = req.cookies;
+    const { token } = req.cookies;
 
     try {
-        jwt.verify(token , process.env.SECRET_KEY , {} , async ( err , info ) => {
+        jwt.verify(token, process.env.SECRET_KEY, {}, async(err, info) => {
             if (err) throw err
             const user = await User.findByIdAndUpdate(
-                info.id,{
-                $push : {cart : _id},    
-                },
-                {
-                    new : true
+                info.id, {
+                    $push: { cart: _id },
+                }, {
+                    new: true
                 })
 
             res.status(201).json({
                 message: "Product added to cart successfully",
                 success: true,
-                productId : _id
+                productId: _id
             })
         })
-     
+
     } catch (error) {
         res.status(500).json({
             message: "Problem in adding product to cart",
@@ -62,22 +61,21 @@ const addProductToCart = (req, res) => {
 const removeCartProduct = async(req, res) => {
 
     const { id } = req.params
-    const {token} = req.cookies
+    const { token } = req.cookies
     try {
-        jwt.verify(token , process.env.SECRET_KEY , {} , async (err , info ) => {
+        jwt.verify(token, process.env.SECRET_KEY, {}, async(err, info) => {
             if (err) throw err
             const user = await User.findByIdAndUpdate(
-                info.id,{
-                $pull : {cart : id},    
-                },
-                {
-                    new : true
+                info.id, {
+                    $pull: { cart: id },
+                }, {
+                    new: true
                 })
 
             res.status(201).json({
                 message: "Product deleted from cart successfully",
                 success: true,
-                productId : id
+                productId: id
             })
         })
 

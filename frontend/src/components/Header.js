@@ -1,5 +1,5 @@
-import React  from 'react'
-import {NavLink,Link, useNavigate} from "react-router-dom"
+import React from 'react'
+import { NavLink, Link, useNavigate } from "react-router-dom"
 import { useAuth } from '../contexts/AuthContext'
 import HangulLogo from "../images/hangul-logo.png"
 import { useFilters } from '../contexts/FilterContext'
@@ -11,16 +11,17 @@ const Header = () => {
   const {filterState : {searchQuery} , dispatchFilters} = useFilters();
   const navigate = useNavigate();
 
-  const logoutHandler = async () => {
-    const res = await fetch("/api/user/logout");
-    const data = await res.json();
-    dispatchAuth({type : "LOGOUT" , payload : data.token})
-    localStorage.removeItem("AUTH_TOKEN")
-    navigate("/login")
-  }
 
-  return (
-  <nav className="navbar navbar-expand-lg">
+        const logoutHandler = async() => {
+            const res = await fetch("/api/user/logout");
+            const data = await res.json();
+            dispatchAuth({ type: "LOGOUT", payload: data.token })
+            navigate("/login")
+        }
+
+
+
+  return ( <nav className="navbar navbar-expand-lg">
   <div className="container-fluid">
     <Link to="/" className="navbar-brand">
     <img className='logo' src = {HangulLogo} alt = "logo" />
@@ -67,4 +68,5 @@ const Header = () => {
   )
 }
 
-export default Header
+
+        export default Header

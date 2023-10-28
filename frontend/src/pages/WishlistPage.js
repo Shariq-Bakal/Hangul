@@ -30,6 +30,7 @@ const WishlistPage = () => {
 
     return (
         <Layout>
+
         { isLoading ? <Loader/> : <div>
             <h4 className='heading m-4'>My Wishlist ({wishlist?.length})</h4>
             <div className='product-container'>
@@ -41,7 +42,6 @@ const WishlistPage = () => {
               <button type="button" onClick={ () => removeFromWishlist(product)} className="btn btn-dark m-2">Remove from Wishlist</button> <br/> 
             </div>)
         } 
-        </div>
         </div>}
         </Layout>
     );
