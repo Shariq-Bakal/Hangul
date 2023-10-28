@@ -9,6 +9,24 @@
     box-shadow: 0 6px 10px -6px grey;
 }
 
+.text-img{
+    font-size: 80px;
+    font-weight: 900;
+    background-image: url("./images//hangul.jpg");
+    background-size: cover;
+    background-position: center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.logo{
+    max-width: 3rem;
+    margin-left: 1rem;
+    border: 2px solid #212529;
+    border-radius: 50%;
+}
+
 .app {
     min-height: 80vh;
 }
@@ -35,9 +53,6 @@
 .product-container p .actual-price { 
     font-weight: 550;
     font-size: 1.1rem;
-}
-
-.actual-price{
     text-decoration: line-through;
 }
 
@@ -50,9 +65,15 @@
     max-height: 75vh;
 }
 
-.product-img:hover{
+/* .product-img:hover{
     transition: .5s ease-in-out;
-	transform: scale(0.9);
+	  transform: scale(0.9);
+    cursor: pointer;
+} */
+
+.modal-open:hover{
+  transition: .5s ease-in-out;
+	  transform: scale(0.9);
     cursor: pointer;
 }
 
@@ -82,6 +103,7 @@
 
 .heading{
     text-align: center;
+    color: rgb(95, 92, 92);
 }
 
 .cart-card{
@@ -106,6 +128,16 @@
 
 .product-card{
     max-width: 23vw;
+}
+
+
+.wishlist-card{
+  max-width: 20vw;
+
+}
+
+.wishlist-card h4{
+  font-size: 1rem;
 }
 
 .flex{
@@ -140,3 +172,207 @@
 .error-msg{
     color: red;
 }
+
+.hero-section {
+    display: flex;
+    height: fit-content;
+    margin: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .homepage-img {
+    width: 60vw;
+  }
+  
+  .homepage-description h1 {
+    color: #212529;
+    font-size: 1.7rem;
+  }
+  
+  .homepage-img img {
+    max-width: 90%;
+    border-radius: 5px;
+  }
+  
+  .homepage-description .text {
+    margin: 1rem 0rem;
+    line-height: 1.8rem;
+    font-size: 1.1rem;
+    color: rgb(95, 92, 92);
+    margin-block-end: 0;
+  }
+  
+  .homepage-description .ctc-btn {
+    border: 1px solid #212529;
+    background: none;
+    color: #212529;
+    padding: 0.5rem 3rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .featured h1 {
+    margin: auto;
+    width: fit-content;
+    color: #212529;
+    border-bottom: 1px solid black;
+  }
+  
+  .featured {
+    background-color: rgb(242, 242, 243);
+    padding: 1rem;
+  }
+  
+  .suggested-product-card {
+    margin: 1rem;
+    width: 20vw;
+    background-color: white;
+    padding-top: 1rem;
+  }
+  
+  .suggested-product-card img {
+    display: block;
+    margin: auto;
+    max-width: 80%;
+    object-fit: contain;
+  }
+  
+  .hr {
+    margin: 1rem 0rem;
+  }
+  
+  .flex-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+  }
+  
+  .rating {
+    background-color: #212529;
+    padding: 0.2rem 0.5rem;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  .name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 70%;
+    font-size: 1.1rem;
+    font-family: sans-serif;
+    font-weight: 550;
+  }
+  
+  .suggested-product-card .price {
+    margin: 0.5rem auto;
+    width: 90%;
+    font-size: 1.1rem;
+    font-weight: 550;
+  }
+  
+  .cart-btn {
+    border: none;
+    background-color: #212529;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    border-radius: 0;
+  }
+  
+  .suggested-product-container {
+    overflow-y: hidden;
+    overflow-x: scroll;
+  }
+  
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .about-page{
+    width: 70%;
+    margin: auto;
+  }
+
+  .about-page .text{
+    color: rgb(95, 92, 92);
+    font-size: 0.88rem;
+    line-height: 1.1rem;
+  }
+
+  .about-page .sub-heading{
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgb(72, 72, 72);
+  }
+
+  .avatar{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+  }
+
+  .sidebar{
+    width: 15rem;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    padding: 1rem;
+    background-color: rgb(240, 240, 240);
+    z-index: 1000;
+    transition: 2s ease translate;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    background: #212529; 
+    cursor: pointer;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    background: rgb(139, 137, 137);
+  }
+  
+  .form-range::-moz-range-thumb {
+    background: #212529; 
+    cursor: pointer; 
+  }
+
+  .filter-price{
+    position: absolute;
+    right: 1.4rem;
+    top : 3.5rem;
+  }
+
+  .rating-section input , .service-section input  {
+    margin-right: 1rem;
+  }
+
+  .rating-section div {
+    margin-bottom: 1rem;
+  }
+
+  input.larger {
+    width: 18px;
+    height: 18px;
+  }
+
+  input[type="radio"] {
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.3);
+  }
+
+  .close-btn{
+    position: absolute;
+    left: 11rem;
+    top: 1rem;
+    z-index: 1200;
+  }

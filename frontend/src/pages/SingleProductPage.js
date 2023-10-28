@@ -2,16 +2,20 @@ import React, { useEffect } from 'react';
 import Layout from '../components/Layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProducts } from '../contexts/ProductContext';
+import { Loader } from '../components/Loader';
+import { useFilters } from '../contexts/FilterContext';
 
 const SingleProductPage = () => {
     const {id} = useParams();
     const {dispatchProduct , productState : {singleProduct , cart , wishlist , products } } = useProducts();
+    const {  isLoading , setIsLoading} = useFilters();
     const navigate = useNavigate();
 
     const getSingleProduct = async () => {
         const res = await fetch(`/api/products/${id}`)
         const singleProd = await res.json()
         dispatchProduct({type: "GET_SINGLE_PRODUCT", payload : singleProd?.product})
+        setIsLoading(false)
     }
 
     const getWishlistProducts = async ()=>{
@@ -28,6 +32,7 @@ const SingleProductPage = () => {
 
 
     useEffect(() => {
+      setIsLoading(true)
         getSingleProduct();
         getWishlistProducts();
         getCartProducts();
@@ -64,7 +69,7 @@ const SingleProductPage = () => {
 
     return (
        <Layout>
-        <div className='single-product p-2 m-2'>
+      { isLoading ? <Loader /> : <div className='single-product p-2 m-2'>
             <div>
                 <img className='product-img' src = {"../"+singleProduct?.productImg} height= "500px" width="500px" alt = "product_image"/>
             </div>
@@ -77,7 +82,7 @@ const SingleProductPage = () => {
 
                {wishlist?.find((item) => item._id === singleProduct._id) ? <button type="button"  className="btn btn-secondary m-1" onClick= {() => navigate("/wishlist")}>Go to wishlist</button>  : <button type="button"  onClick={()=>addToWishlist()} className="btn btn-secondary m-1">Add to wishlist</button>}
             </div>
-        </div>
+        </div>}
        </Layout>
     );
 }
